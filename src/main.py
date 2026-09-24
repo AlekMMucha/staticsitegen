@@ -1,6 +1,5 @@
 import os
 import shutil
-import re
 from generate_page import generate_page
 def main():
     ###check if the public is empty, if not then make it empty
@@ -9,13 +8,13 @@ def main():
     ###checking to see if path is intact, if it is removeing it and adding to clear it.
     if os.path.exists(path_to_public_dir):
         shutil.rmtree(path_to_public_dir)
-    os.mkdir(path_to_public_dir)
+    os.makedirs(path_to_public_dir,exist_ok=True)
     ###checking to see if static dir is there
     if not os.path.exists(path_to_static_dir):
         raise Exception("No static directory to copy from")
     copy_layer_recursive(path_to_public_dir,path_to_static_dir)
 ###recursive function to copy all of static dir to public dir with logger decorator
-    generate_page("content/index.md","template.html","public/index.html")
+    generate_page("./content/index.md","./template.html","./public/index.html")
     
 
 def logger(func):
@@ -34,11 +33,5 @@ def copy_layer_recursive(current_path_public,current_path_static):
             os.mkdir(os.path.join(current_path_public,item))
             copy_layer_recursive(os.path.join(current_path_public,item),os.path.join(current_path_static,item))
 
-def extract_title(markdown):
-    matches = re.findall(r"^#\s+(.+)", markdown, re.MULTILINE)
-    if len(matches)==0:
-        raise Exception("no header 1 (h1) to extract title from")
-    else:
-        return matches[0]
 if __name__ == "__main__":
     main()

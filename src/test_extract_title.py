@@ -1,5 +1,5 @@
 import unittest
-from main import extract_title
+from extract_title import extract_title
 class TestExtractTitle(unittest.TestCase):
     def test_extract_title(self):
         extracted_title = extract_title("# this is my header\nthis shouldnt be part of the header.")

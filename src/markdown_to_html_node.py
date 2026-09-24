@@ -1,6 +1,6 @@
 from markdown_to_blocks import markdown_to_blocks
 from block_type import BlockType,block_to_block_type
-from htmlnode import HTMLNode,LeafNode,ParentNode
+from htmlnode import HTMLNode,ParentNode
 from text_to_textnode import text_to_textnode
 from textnode import text_node_to_html_node,TextNode,TextType
 import re
