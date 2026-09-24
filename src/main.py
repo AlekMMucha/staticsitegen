@@ -2,8 +2,8 @@ import os
 import shutil
 def main():
     ###check if the public is empty, if not then make it empty
-    path_to_public_dir = "../public"
-    path_to_static_dir = "../static"
+    path_to_public_dir = "./public/"
+    path_to_static_dir = "./static/"
     ###checking to see if path is intact, if it is removeing it and adding to clear it.
     if os.path.exists(path_to_public_dir):
         shutil.rmtree(path_to_public_dir)
