@@ -1,20 +1,25 @@
 import os
 import shutil
-from generate_page import generate_page_recursive
+from generate_page import generate_page_recursive,generate_page
+import sys
 def main():
+    basepath = sys.argv[1]
+    if len(sys.argv)<2:
+        basepath = "/"
+    
     ###check if the public is empty, if not then make it empty
-    path_to_public_dir = "./public/"
+    path_to_docs_dir = "./docs/"
     path_to_static_dir = "./static/"
     ###checking to see if path is intact, if it is removeing it and adding to clear it.
-    if os.path.exists(path_to_public_dir):
-        shutil.rmtree(path_to_public_dir)
-    os.makedirs(path_to_public_dir,exist_ok=True)
+    if os.path.exists(path_to_docs_dir):
+        shutil.rmtree(path_to_docs_dir)
+    os.makedirs(path_to_docs_dir,exist_ok=True)
     ###checking to see if static dir is there
     if not os.path.exists(path_to_static_dir):
         raise Exception("No static directory to copy from")
-    copy_layer_recursive(path_to_public_dir,path_to_static_dir)
+    copy_layer_recursive(path_to_docs_dir,path_to_static_dir)
 ###recursive function to copy all of static dir to public dir with logger decorator
-    generate_page_recursive("./content","./template.html","./public")
+    generate_page_recursive("./content","./template.html","./docs", basepath)
     
 
 def logger(func):
