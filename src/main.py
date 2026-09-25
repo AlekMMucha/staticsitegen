@@ -1,6 +1,6 @@
 import os
 import shutil
-from generate_page import generate_page
+from generate_page import generate_page_recursive
 def main():
     ###check if the public is empty, if not then make it empty
     path_to_public_dir = "./public/"
@@ -14,7 +14,7 @@ def main():
         raise Exception("No static directory to copy from")
     copy_layer_recursive(path_to_public_dir,path_to_static_dir)
 ###recursive function to copy all of static dir to public dir with logger decorator
-    generate_page("./content/index.md","./template.html","./public/index.html")
+    generate_page_recursive("./content","./template.html","./public")
     
 
 def logger(func):
